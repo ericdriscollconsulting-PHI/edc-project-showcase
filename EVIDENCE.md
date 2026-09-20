@@ -26,6 +26,14 @@ The Report Architect selections are copied unchanged, including the synthetic ou
 
 ## Claim boundaries
 
+### Internal orchestration milestone
+
+The [orchestration case study](case-studies/governed-ai-orchestration.md) and [sanitized execution summary](evidence/governed-ai-execution-summary.json) derive from two retained internal completion reports: “Chief inbox two-draft completion — September 19, 2026” and “PR17 activation and one-draft verification completed,” plus the September 19 night closeout. Both completion reports were read when preparing this addition. They document execution, retrieval, and integrity checks; the closeout records independent verification of the latest draft's bytes and hash. This publication did not rerun the worker or independently reproduce the host tests.
+
+The public summary preserves reported measurements while removing task/grant identifiers, source payloads, host paths, service configuration, and raw logs. It is an edited evidence summary, not the original receipt. Human acceptance remained pending at the recorded checkpoint. The case study is a historical milestone, not a live runtime-status claim.
+
+### Selected examples
+
 - The synthetic report package is generated project evidence, not a client deployment or a savings measurement.
 - The showcased binder and planner consume a valid report contract. Contract validation, conditional intake, and rendering belong to the full project; they are not included in this runnable subset.
 - Package hashes detect internal changes and mixed identities. They do not establish author authenticity against an attacker who can rewrite and consistently reseal an entire package.
@@ -34,4 +42,4 @@ The Report Architect selections are copied unchanged, including the synthetic ou
 
 ## Publication boundary
 
-The package contains selected source and synthetic fixtures. It excludes private repository history, credentials, client records, household records, runtime logs, and deployment configuration. No permission or link into a working repository is needed to run the examples.
+The package contains selected source, synthetic fixtures, and a sanitized summary of internal execution measurements. It excludes private repository history, credentials, client records, household records, raw runtime logs, and deployment configuration. No permission or link into a working repository is needed to run the examples.

@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0",
+  "record_type": "sanitized_execution_summary",
+  "project": "Governed AI Workflow Orchestration",
+  "milestone_date": "2026-09-19",
+  "milestone_timezone": "America/New_York",
+  "scope": "Three internal draft executions across two checks; historical observations, not a controlled benchmark.",
+  "provenance": {
+    "source_records": [
+      "Chief inbox two-draft completion — September 19, 2026",
+      "PR17 activation and one-draft verification completed",
+      "Chief autonomy — night closeout and morning starting point"
+    ],
+    "verification_basis": "Retained completion reports document submission, retrieval and hash verification. The closeout records independent verification of the latest draft's bytes and hash. Publication did not rerun execution.",
+    "public_record_is_original_receipt": false,
+    "redactions": [
+      "Task and grant identifiers",
+      "Request, receipt and result hashes",
+      "Source payloads and generated draft contents",
+      "Host paths and service configuration",
+      "Raw operational logs"
+    ]
+  },
+  "runs": [
+    {
+      "label": "Integration brief",
+      "receipt_duration_seconds": 119.865078,
+      "submission_to_final_retrieval_seconds": 205.379106,
+      "acknowledgement_seconds": null,
+      "initial_transport_response": "timeout; recovered through passive reads under original task identity",
+      "input_tokens": 14322,
+      "cached_input_tokens_included": 6784,
+      "output_tokens": 3035,
+      "total_tokens": 17357,
+      "result_utf8_bytes": 8914,
+      "submissions": 1,
+      "task_retries": 0,
+      "output_integrity": "verified per retained completion record",
+      "human_accepted_at_checkpoint": false
+    },
+    {
+      "label": "Proposed website copy",
+      "receipt_duration_seconds": 83.97848,
+      "submission_to_final_retrieval_seconds": 115.619575,
+      "acknowledgement_seconds": null,
+      "initial_transport_response": "returned terminal result; reconciled under original task identity",
+      "input_tokens": 10183,
+      "cached_input_tokens_included": 6784,
+      "output_tokens": 1888,
+      "total_tokens": 12071,
+      "result_utf8_bytes": 5288,
+      "submissions": 1,
+      "task_retries": 0,
+      "output_integrity": "verified per retained completion record",
+      "human_accepted_at_checkpoint": false
+    },
+    {
+      "label": "Pilot intake and evaluation rubric",
+      "receipt_duration_seconds": 119.476356,
+      "submission_to_final_retrieval_seconds": 131.966,
+      "acknowledgement_seconds": 6.618,
+      "initial_transport_response": "running acknowledgement before generation completed",
+      "input_tokens": 10534,
+      "cached_input_tokens_included": 6784,
+      "output_tokens": 3142,
+      "total_tokens": 13676,
+      "result_utf8_bytes": 8171,
+      "submissions": 1,
+      "task_retries": 0,
+      "output_integrity": "verified per retained completion record and coordinator closeout",
+      "human_accepted_at_checkpoint": false
+    }
+  ],
+  "totals": {
+    "completed_drafts": 3,
+    "accepted_outcomes_at_checkpoint": 0,
+    "input_tokens": 35039,
+    "cached_input_tokens_included": 20352,
+    "output_tokens": 8065,
+    "total_tokens": 43104,
+    "submissions": 3,
+    "task_retries": 0
+  },
+  "human_effort": {
+    "first_two_runs": {
+      "approvals_estimate_range": [
+        5,
+        7
+      ],
+      "intervention_minutes_estimate_range": [
+        1,
+        5
+      ],
+      "basis": "Owner estimate; not independently audited; excludes setup and subsequent output review"
+    },
+    "latest_run_approvals": null,
+    "latest_run_intervention_minutes": null,
+    "manual_prompt_result_relay_reported": 0,
+    "review_and_rework_minutes": null,
+    "setup_effort": null
+  },
+  "economics": {
+    "actual_served_model": null,
+    "billing_pool": null,
+    "monetary_cost": null,
+    "cost_per_accepted_outcome": null,
+    "cost_per_accepted_outcome_status": "undefined: zero accepted outcomes at checkpoint"
+  },
+  "limitations": [
+    "Cached input is already counted in input tokens; do not add it again.",
+    "Token totals exclude coordinator authoring/review, setup, troubleshooting and earlier attempts.",
+    "One draft required a recovery-instruction correction before implementation.",
+    "Different tasks and revisions do not establish a controlled before/after performance comparison.",
+    "Completed and retrieved does not mean human-accepted, client-deployed or economically validated.",
+    "No infrastructure access or execution authority is conveyed by this record."
+  ]
+}
