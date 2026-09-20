@@ -1,0 +1,118 @@
+{
+  "artifactHashes": {
+    "cloudability-deployment-manifest.json": "1024a7b97ba70e5a35655cfec03d79a2decb6c426e395ed5e976410a52ae872e",
+    "interview-trace.json": "7805d012568885bc2cd1c9c75cd61d0c98acf424333aa3efcd8b51c0c15eb4d3",
+    "manual-build-guide.md": "f4540783c808cc4f914edc0d1e795d0515b0c47060c1bfcf7dfa0ccd7e790f4f",
+    "report-contract.json": "eff6374500b6504325ec5ab77d278ac77c71fc48c0b253c5a1094650c9f6df35",
+    "report-rationale.md": "7ee84b72860d57cd7ef0d2ee4f310d8229e01de092603612489653b879e5da0a"
+  },
+  "checks": [
+    {
+      "id": "design-complete",
+      "message": "All applicable intake answers compile into a deterministic modular report design.",
+      "status": "pass"
+    },
+    {
+      "id": "query-definitions",
+      "message": "Read-only GET /v3/reporting/cost/run definitions were generated; execution is not implied.",
+      "status": "pass"
+    },
+    {
+      "id": "tenant-bindings",
+      "message": "Every required field has a synthetic candidate binding; target-tenant confirmation remains required.",
+      "status": "warning"
+    },
+    {
+      "id": "comparison-inputs",
+      "message": "External inputs remain required for: budget, forecast.",
+      "status": "warning"
+    },
+    {
+      "id": "data-dependencies",
+      "message": "Additional source requirements are defined, but inputs, integration, grain checks, freshness, and reconciliation remain unconfirmed.",
+      "status": "warning"
+    },
+    {
+      "id": "module-rankings",
+      "message": "Every module and selected comparison baseline has an explicit deterministic ranking plan.",
+      "status": "pass"
+    },
+    {
+      "id": "alert-requirements",
+      "message": "Alert trigger, delivery, cooldown, resolution, and escalation requirements are recorded; manual configuration, testing, and approval remain required.",
+      "status": "warning"
+    },
+    {
+      "id": "write-boundary",
+      "message": "The generated package has no Cloudability View, API, or alert write authority.",
+      "status": "pass"
+    }
+  ],
+  "contractId": "rpt-int-executive-cloud-overspend-001",
+  "findings": [
+    {
+      "affectedPath": "cloudability-deployment-manifest.json#/bindings",
+      "classification": "tenant",
+      "message": "Synthetic candidate bindings do not prove that fields exist in a target tenant.",
+      "severity": "warning"
+    },
+    {
+      "affectedPath": "cloudability-deployment-manifest.json#/execution/queryPlan/queries",
+      "classification": "tenant",
+      "message": "The target tenant has not confirmed that the bound provider field uses the exact AWS literal required by the filter.",
+      "severity": "warning"
+    },
+    {
+      "affectedPath": "cloudability-deployment-manifest.json#/delivery/automatedCreateStatus",
+      "classification": "capability",
+      "message": "Automated saved-report creation is unverified; View writes are intentionally disabled in this runtime.",
+      "severity": "warning"
+    },
+    {
+      "affectedPath": "cloudability-deployment-manifest.json#/execution/queryPlan/comparisonData",
+      "classification": "input",
+      "message": "Budget AWS-only scope, source, columns, grain, currency, and reconciliation require manual confirmation.",
+      "severity": "warning"
+    },
+    {
+      "affectedPath": "cloudability-deployment-manifest.json#/execution/queryPlan/comparisonData",
+      "classification": "input",
+      "message": "Forecast AWS-only scope, source, columns, grain, currency, and reconciliation require manual confirmation.",
+      "severity": "warning"
+    },
+    {
+      "affectedPath": "cloudability-deployment-manifest.json#/dataDependencyPlan",
+      "classification": "input",
+      "message": "Additional source inputs and integration are not configured; join coverage, grain, cadence, owner, and reconciliation require manual confirmation.",
+      "severity": "warning"
+    },
+    {
+      "affectedPath": "cloudability-deployment-manifest.json#/alertPlan",
+      "classification": "governance",
+      "message": "Requested alerts require separate manual configuration, testing, and activation approval.",
+      "severity": "warning"
+    }
+  ],
+  "overallStatus": "design-ready",
+  "packageHash": "7d4e6b8983daeb1c4e46c20f19f95468b916e36bd274db321a3a8e8f0b3a98c9",
+  "provenance": {
+    "rendererVersion": "2.1.0"
+  },
+  "readiness": {
+    "alertAutomation": false,
+    "alertRequirementsComplete": true,
+    "automatedCreate": false,
+    "comparisonInputsConfirmed": false,
+    "dataDependencyDefinitionComplete": true,
+    "dataDependencyInputsConfirmed": false,
+    "designComplete": true,
+    "executablePreview": false,
+    "manualBuildReady": false,
+    "moduleRankingsGenerated": true,
+    "queryDefinitionsGenerated": true,
+    "tenantBindingsConfirmed": false,
+    "viewWrite": false
+  },
+  "schemaVersion": "0.3.0",
+  "validationId": "validation-rpt-int-executive-cloud-overspend-001"
+}

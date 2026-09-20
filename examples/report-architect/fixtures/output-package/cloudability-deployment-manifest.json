@@ -1,0 +1,418 @@
+{
+  "alertPlan": {
+    "channels": [
+      "email",
+      "microsoft-teams"
+    ],
+    "configurationMode": "manual-required",
+    "digestCadence": "weekly",
+    "eventPolicy": {
+      "cooldown": "24-hours",
+      "escalation": {
+        "after": "3-days",
+        "recipientRole": "Cloud Finance Director",
+        "status": "requested"
+      },
+      "resolutionRule": "disposition-recorded"
+    },
+    "modes": [
+      "material-exception",
+      "scheduled-digest"
+    ],
+    "recipientRoles": [
+      "report-owner",
+      "finance-leadership"
+    ],
+    "status": "requested",
+    "writeStatus": "disabled"
+  },
+  "bindings": {
+    "dimensions": [
+      {
+        "logicalName": "cost-center",
+        "platformName": "synthetic_business_mapping_cost_center",
+        "status": "tenant-unverified"
+      },
+      {
+        "logicalName": "application",
+        "platformName": "synthetic_business_mapping_application",
+        "status": "tenant-unverified"
+      },
+      {
+        "logicalName": "cloud-provider",
+        "platformName": "vendor",
+        "status": "tenant-unverified"
+      },
+      {
+        "logicalName": "reporting-period",
+        "platformName": "date",
+        "status": "tenant-unverified"
+      }
+    ],
+    "metrics": [
+      {
+        "logicalName": "actual-cost",
+        "platformName": "amortized_cost",
+        "status": "tenant-unverified"
+      }
+    ]
+  },
+  "contractId": "rpt-int-executive-cloud-overspend-001",
+  "dataDependencyPlan": {
+    "configurationMode": "manual-required",
+    "integrationStatus": "not-configured",
+    "requiredValidation": [
+      "Confirm the authoritative source reference, access boundary, and accountable data owner.",
+      "Validate every selected logical join key in both the additional source and Cloudability data.",
+      "Confirm source grain and aggregate current cost before joining whenever the source is coarser.",
+      "Confirm refresh cadence is sufficient for the report review and alert decision cadence.",
+      "Reconcile source coverage, unmatched keys, duplicates, and applicable totals before use."
+    ],
+    "requirement": {
+      "domains": [
+        "cmdb-service-catalog",
+        "business-kpi"
+      ],
+      "grain": "selected-join-keys",
+      "joinKeys": [
+        "application",
+        "reporting-period"
+      ],
+      "ownerRole": "Enterprise Data Product Owner",
+      "refreshCadence": "daily",
+      "sourceReferenceSummary": "Enterprise CMDB/service catalog and governed business KPI data product",
+      "status": "requested"
+    },
+    "writeStatus": "disabled"
+  },
+  "delivery": {
+    "automatedCreateStatus": "unverified",
+    "designReady": true,
+    "manualBuildStatus": "external-data-required",
+    "mode": "manual-assisted",
+    "writeAuthority": "none"
+  },
+  "execution": {
+    "calculations": {
+      "baselines": [
+        {
+          "alignmentPolicy": "direct-join",
+          "baseline": "prior-period",
+          "comparisonCostMetric": "prior-period-cost",
+          "joinKeys": [
+            "cost-center",
+            "application",
+            "cloud-provider"
+          ],
+          "varianceAmountFormula": "current-cost - baseline-cost",
+          "varianceAmountMetric": "prior-period-variance-amount",
+          "variancePercentFormula": "variance-amount / baseline-cost * 100",
+          "variancePercentMetric": "prior-period-variance-percent",
+          "zeroBaselinePolicy": "flag-new-spend-and-suppress-percent"
+        },
+        {
+          "alignmentPolicy": "aggregate-current-to-baseline-grain",
+          "baseline": "budget",
+          "comparisonCostMetric": "budget-cost",
+          "joinKeys": [
+            "cost-center"
+          ],
+          "varianceAmountFormula": "current-cost - baseline-cost",
+          "varianceAmountMetric": "budget-variance-amount",
+          "variancePercentFormula": "variance-amount / baseline-cost * 100",
+          "variancePercentMetric": "budget-variance-percent",
+          "zeroBaselinePolicy": "flag-new-spend-and-suppress-percent"
+        },
+        {
+          "alignmentPolicy": "aggregate-current-to-baseline-grain",
+          "baseline": "forecast",
+          "comparisonCostMetric": "forecast-cost",
+          "joinKeys": [
+            "cost-center"
+          ],
+          "varianceAmountFormula": "current-cost - baseline-cost",
+          "varianceAmountMetric": "forecast-variance-amount",
+          "variancePercentFormula": "variance-amount / baseline-cost * 100",
+          "variancePercentMetric": "forecast-variance-percent",
+          "zeroBaselinePolicy": "flag-new-spend-and-suppress-percent"
+        }
+      ],
+      "currentGroupBy": [
+        "cost-center",
+        "application",
+        "cloud-provider",
+        "reporting-period"
+      ]
+    },
+    "queryPlan": {
+      "comparisonData": [
+        {
+          "alignmentPolicy": "direct-join",
+          "joinKeys": [
+            "synthetic_business_mapping_cost_center",
+            "synthetic_business_mapping_application",
+            "vendor"
+          ],
+          "mode": "reporting-query",
+          "referenceDetail": "same-elapsed-period",
+          "source": "prior-period"
+        },
+        {
+          "alignmentPolicy": "aggregate-current-to-baseline-grain",
+          "currency": "USD",
+          "grain": "accountability-dimension",
+          "joinKeys": [
+            "synthetic_business_mapping_cost_center"
+          ],
+          "mode": "manual-reference",
+          "referenceDetail": "fiscal-month",
+          "requiredColumns": [
+            "report-period",
+            "cost-center",
+            "budget-cost",
+            "currency"
+          ],
+          "source": "budget",
+          "sourceRef": "Finance Approved Budget"
+        },
+        {
+          "alignmentPolicy": "aggregate-current-to-baseline-grain",
+          "currency": "USD",
+          "grain": "accountability-dimension",
+          "joinKeys": [
+            "synthetic_business_mapping_cost_center"
+          ],
+          "mode": "manual-reference",
+          "referenceDetail": "fiscal-year-end as of 2026-08-01",
+          "requiredColumns": [
+            "report-period",
+            "cost-center",
+            "forecast-cost",
+            "currency"
+          ],
+          "source": "forecast",
+          "sourceRef": "Cloud Finance Forecast"
+        }
+      ],
+      "currentGroupBy": [
+        "synthetic_business_mapping_cost_center",
+        "synthetic_business_mapping_application",
+        "vendor",
+        "date"
+      ],
+      "derivedMetrics": [
+        "prior-period-cost",
+        "prior-period-variance-amount",
+        "prior-period-variance-percent",
+        "budget-cost",
+        "budget-variance-amount",
+        "budget-variance-percent",
+        "forecast-cost",
+        "forecast-variance-amount",
+        "forecast-variance-percent"
+      ],
+      "presentation": {
+        "components": [
+          "kpi-summary",
+          "trend-line",
+          "baseline-comparison-chart",
+          "ranked-variance-chart",
+          "detailed-table"
+        ],
+        "limit": 20,
+        "rankingPlans": [
+          {
+            "limit": 20,
+            "module": "spend-overview",
+            "sortDirection": "desc",
+            "sortField": "actual-cost"
+          },
+          {
+            "baseline": "prior-period",
+            "limit": 20,
+            "module": "plan-comparison",
+            "sortDirection": "desc",
+            "sortField": "prior-period-variance-amount"
+          },
+          {
+            "baseline": "budget",
+            "limit": 20,
+            "module": "plan-comparison",
+            "sortDirection": "desc",
+            "sortField": "budget-variance-amount"
+          },
+          {
+            "baseline": "forecast",
+            "limit": 20,
+            "module": "plan-comparison",
+            "sortDirection": "desc",
+            "sortField": "forecast-variance-amount"
+          },
+          {
+            "baseline": "prior-period",
+            "limit": 20,
+            "module": "cost-exceptions",
+            "sortDirection": "desc",
+            "sortField": "prior-period-variance-amount"
+          },
+          {
+            "baseline": "budget",
+            "limit": 20,
+            "module": "cost-exceptions",
+            "sortDirection": "desc",
+            "sortField": "budget-variance-amount"
+          },
+          {
+            "baseline": "forecast",
+            "limit": 20,
+            "module": "cost-exceptions",
+            "sortDirection": "desc",
+            "sortField": "forecast-variance-amount"
+          },
+          {
+            "limit": 20,
+            "module": "accountability",
+            "sortDirection": "desc",
+            "sortField": "actual-cost"
+          }
+        ],
+        "requestedFormats": [
+          "cloudability-view",
+          "pdf-summary",
+          "json-specification"
+        ],
+        "sortDirection": "desc",
+        "sortField": "actual-cost"
+      },
+      "queries": [
+        {
+          "dimensions": [
+            "synthetic_business_mapping_cost_center",
+            "synthetic_business_mapping_application",
+            "vendor",
+            "date"
+          ],
+          "endpoint": "/v3/reporting/cost/run",
+          "filters": [
+            {
+              "comparator": "==",
+              "field": "vendor",
+              "values": [
+                "AWS"
+              ]
+            }
+          ],
+          "method": "GET",
+          "metrics": [
+            "amortized_cost"
+          ],
+          "name": "current",
+          "period": "month-to-date",
+          "readOnly": true
+        },
+        {
+          "dimensions": [
+            "synthetic_business_mapping_cost_center",
+            "synthetic_business_mapping_application",
+            "vendor",
+            "date"
+          ],
+          "endpoint": "/v3/reporting/cost/run",
+          "filters": [
+            {
+              "comparator": "==",
+              "field": "vendor",
+              "values": [
+                "AWS"
+              ]
+            }
+          ],
+          "method": "GET",
+          "metrics": [
+            "amortized_cost"
+          ],
+          "name": "prior-period",
+          "period": "same-elapsed-period",
+          "readOnly": true
+        },
+        {
+          "dimensions": [
+            "date"
+          ],
+          "endpoint": "/v3/reporting/cost/run",
+          "filters": [
+            {
+              "comparator": "==",
+              "field": "vendor",
+              "values": [
+                "AWS"
+              ]
+            }
+          ],
+          "method": "GET",
+          "metrics": [
+            "amortized_cost"
+          ],
+          "name": "trend",
+          "period": "month-to-date",
+          "readOnly": true
+        }
+      ],
+      "readOnly": true
+    },
+    "strategy": "mixed-comparison"
+  },
+  "limitations": [
+    "Saved-report creation capability is unverified; View writes are intentionally not enabled in this runtime, and this package performs no write.",
+    "Cloudability UI labels, fields, and tenant bindings require confirmation in the target tenant.",
+    "The target tenant must confirm that the bound provider field uses the exact AWS value before any query result is accepted.",
+    "Generated read-query definitions have not been executed or reconciled against a target tenant.",
+    "The private-beta MCP server is not an MVP dependency and remains unverified.",
+    "Budget and forecast baselines are external manual inputs; native Cloudability ingestion, joining, and presentation are not assumed.",
+    "Additional source integration is not configured; source access, join keys, grain, cadence, ownership, and reconciliation require manual validation.",
+    "Alert requirements are captured for manual or separately approved integration setup; this package does not configure or send alerts."
+  ],
+  "manifestId": "manifest-rpt-int-executive-cloud-overspend-001",
+  "provenance": {
+    "contractId": "rpt-int-executive-cloud-overspend-001",
+    "rendererVersion": "2.1.0"
+  },
+  "schemaVersion": "0.3.0",
+  "target": {
+    "capabilityProfileId": "synthetic-executive-demo",
+    "edition": "tenant-unverified",
+    "platform": "IBM Apptio Cloudability"
+  },
+  "viewPlan": {
+    "action": "preview-only",
+    "components": [
+      "kpi-summary",
+      "trend-line",
+      "baseline-comparison-chart",
+      "ranked-variance-chart",
+      "detailed-table"
+    ],
+    "filters": [
+      {
+        "comparator": "==",
+        "field": "vendor",
+        "values": [
+          "AWS"
+        ]
+      }
+    ],
+    "modules": [
+      "spend-overview",
+      "plan-comparison",
+      "cost-exceptions",
+      "accountability"
+    ],
+    "requestedFormats": [
+      "cloudability-view",
+      "pdf-summary",
+      "json-specification"
+    ],
+    "title": "Executive AWS Cost Exceptions Scope",
+    "writeStatus": "disabled"
+  }
+}

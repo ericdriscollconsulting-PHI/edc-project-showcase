@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "0.1.0",
+  "tenantId": "synthetic-executive-demo",
+  "mode": "synthetic",
+  "dimensions": {
+    "cost-center": "synthetic_business_mapping_cost_center",
+    "application": "synthetic_business_mapping_application",
+    "business-unit": "synthetic_business_mapping_business_unit",
+    "cloud-account": "account_identifier",
+    "cloud-provider": "vendor",
+    "reporting-period": "date"
+  },
+  "metrics": {
+    "actual-cost": "amortized_cost"
+  },
+  "writePolicy": {
+    "allowViewWrites": false,
+    "requireApproval": true
+  }
+}

@@ -1,0 +1,813 @@
+{
+  "contractId": "rpt-int-executive-cloud-overspend-001",
+  "interviewId": "int-executive-cloud-overspend-001",
+  "mappings": [
+    {
+      "ruleId": "route.executive.v2",
+      "source": "route-recipient-persona",
+      "targets": [
+        "report-contract.json#/recipientPersona"
+      ]
+    },
+    {
+      "ruleId": "recipe.cloud-cost-management.v2",
+      "source": "route-primary-concern",
+      "targets": [
+        "report-contract.json#/recipeId"
+      ]
+    },
+    {
+      "ruleId": "scope.provider.aws.v1",
+      "source": "mvp-provider-scope",
+      "targets": [
+        "report-contract.json#/filters",
+        "cloudability-deployment-manifest.json#/execution/queryPlan/queries"
+      ]
+    },
+    {
+      "ruleId": "objectives.modules.v2",
+      "source": "cloudability-goals",
+      "targets": [
+        "report-contract.json#/objectives",
+        "report-contract.json#/modules",
+        "report-contract.json#/businessQuestions"
+      ]
+    },
+    {
+      "ruleId": "objectives.lead.v2",
+      "source": "lead-use-case",
+      "targets": [
+        "report-contract.json#/leadObjective",
+        "report-contract.json#/decision"
+      ]
+    },
+    {
+      "ruleId": "period.current.v2",
+      "source": "current-period",
+      "targets": [
+        "report-contract.json#/currentPeriod",
+        "cloudability-deployment-manifest.json#/execution/queryPlan/queries"
+      ]
+    },
+    {
+      "ruleId": "comparisons.route.v2",
+      "source": "comparison-baselines",
+      "targets": [
+        "report-contract.json#/comparisons",
+        "cloudability-deployment-manifest.json#/execution/queryPlan/comparisonData"
+      ]
+    },
+    {
+      "ruleId": "comparison.prior-period.v2",
+      "source": "prior-period-mode",
+      "targets": [
+        "report-contract.json#/comparisons"
+      ]
+    },
+    {
+      "ruleId": "comparison.budget-source.v2",
+      "source": "budget-source",
+      "targets": [
+        "report-contract.json#/comparisons"
+      ]
+    },
+    {
+      "ruleId": "comparison.budget-period.v2",
+      "source": "budget-period",
+      "targets": [
+        "report-contract.json#/comparisons"
+      ]
+    },
+    {
+      "ruleId": "comparison.budget-grain.v2",
+      "source": "budget-grain",
+      "targets": [
+        "report-contract.json#/comparisons",
+        "cloudability-deployment-manifest.json#/execution/queryPlan/comparisonData"
+      ]
+    },
+    {
+      "ruleId": "comparison.forecast-source.v2",
+      "source": "forecast-source",
+      "targets": [
+        "report-contract.json#/comparisons"
+      ]
+    },
+    {
+      "ruleId": "comparison.forecast-horizon.v2",
+      "source": "forecast-horizon",
+      "targets": [
+        "report-contract.json#/comparisons"
+      ]
+    },
+    {
+      "ruleId": "comparison.forecast-version.v2",
+      "source": "forecast-as-of",
+      "targets": [
+        "report-contract.json#/comparisons"
+      ]
+    },
+    {
+      "ruleId": "comparison.forecast-grain.v2",
+      "source": "forecast-grain",
+      "targets": [
+        "report-contract.json#/comparisons",
+        "cloudability-deployment-manifest.json#/execution/queryPlan/comparisonData"
+      ]
+    },
+    {
+      "ruleId": "comparison.currency.v2",
+      "source": "reporting-currency",
+      "targets": [
+        "report-contract.json#/comparisons",
+        "report-contract.json#/anomalyManagement/materiality"
+      ]
+    },
+    {
+      "ruleId": "scope.level.v2",
+      "source": "organizational-scope",
+      "targets": [
+        "report-contract.json#/scope/level",
+        "report-contract.json#/filters"
+      ]
+    },
+    {
+      "ruleId": "scope.filter-value.v2",
+      "source": "scope-value",
+      "targets": [
+        "report-contract.json#/scope/value",
+        "report-contract.json#/filters"
+      ]
+    },
+    {
+      "ruleId": "accountability.grouping.v2",
+      "source": "accountability-dimension",
+      "targets": [
+        "report-contract.json#/scope/accountabilityDimension",
+        "report-contract.json#/logicalDimensions"
+      ]
+    },
+    {
+      "ruleId": "data-dependency.status.v1",
+      "source": "additional-data-status",
+      "targets": [
+        "report-contract.json#/dataDependencies/status",
+        "cloudability-deployment-manifest.json#/dataDependencyPlan"
+      ]
+    },
+    {
+      "ruleId": "data-dependency.domains.v1",
+      "source": "additional-data-domains",
+      "targets": [
+        "report-contract.json#/dataDependencies/domains"
+      ]
+    },
+    {
+      "ruleId": "data-dependency.sources.v1",
+      "source": "additional-data-source-summary",
+      "targets": [
+        "report-contract.json#/dataDependencies/sourceReferenceSummary"
+      ]
+    },
+    {
+      "ruleId": "data-dependency.join-keys.v1",
+      "source": "additional-data-join-keys",
+      "targets": [
+        "report-contract.json#/dataDependencies/joinKeys",
+        "report-contract.json#/calculationRules/currentGroupBy",
+        "cloudability-deployment-manifest.json#/bindings/dimensions",
+        "cloudability-deployment-manifest.json#/execution/queryPlan/queries"
+      ]
+    },
+    {
+      "ruleId": "data-dependency.custom-join-key.v1",
+      "source": "additional-data-custom-join-key",
+      "targets": [
+        "report-contract.json#/dataDependencies/customJoinKey",
+        "report-contract.json#/calculationRules/currentGroupBy",
+        "cloudability-deployment-manifest.json#/bindings/dimensions"
+      ]
+    },
+    {
+      "ruleId": "data-dependency.grain.v1",
+      "source": "additional-data-grain",
+      "targets": [
+        "report-contract.json#/dataDependencies/grain"
+      ]
+    },
+    {
+      "ruleId": "data-dependency.cadence.v1",
+      "source": "additional-data-refresh",
+      "targets": [
+        "report-contract.json#/dataDependencies/refreshCadence"
+      ]
+    },
+    {
+      "ruleId": "data-dependency.owner.v1",
+      "source": "additional-data-owner-role",
+      "targets": [
+        "report-contract.json#/dataDependencies/ownerRole"
+      ]
+    },
+    {
+      "ruleId": "anomaly.materiality-method.v2",
+      "source": "materiality-method",
+      "targets": [
+        "report-contract.json#/anomalyManagement/materiality"
+      ]
+    },
+    {
+      "ruleId": "anomaly.threshold-percentage.v2",
+      "source": "threshold-percent",
+      "targets": [
+        "report-contract.json#/anomalyManagement/materiality/percentage"
+      ]
+    },
+    {
+      "ruleId": "anomaly.threshold-amount.v2",
+      "source": "threshold-amount",
+      "targets": [
+        "report-contract.json#/anomalyManagement/materiality/amount"
+      ]
+    },
+    {
+      "ruleId": "anomaly.threshold-combination.v2",
+      "source": "threshold-combination",
+      "targets": [
+        "report-contract.json#/anomalyManagement/materiality/combination"
+      ]
+    },
+    {
+      "ruleId": "anomaly.baseline-breach.v2",
+      "source": "baseline-breach-mode",
+      "targets": [
+        "report-contract.json#/anomalyManagement/breachAcrossBaselines"
+      ]
+    },
+    {
+      "ruleId": "anomaly.response.v2",
+      "source": "breach-action",
+      "targets": [
+        "report-contract.json#/anomalyManagement/response",
+        "report-contract.json#/decision"
+      ]
+    },
+    {
+      "ruleId": "accountability.owner.v2",
+      "source": "action-owner-role",
+      "targets": [
+        "report-contract.json#/accountableOwnerRole"
+      ]
+    },
+    {
+      "ruleId": "presentation.mode.v2",
+      "source": "presentation-mode",
+      "targets": [
+        "report-contract.json#/presentation/mode"
+      ]
+    },
+    {
+      "ruleId": "presentation.components.v2",
+      "source": "visual-components",
+      "targets": [
+        "report-contract.json#/presentation/components",
+        "report-contract.json#/rankingPlans",
+        "cloudability-deployment-manifest.json#/execution/queryPlan/queries"
+      ]
+    },
+    {
+      "ruleId": "presentation.table-density.v2",
+      "source": "table-density",
+      "targets": [
+        "report-contract.json#/presentation/tableDensity",
+        "report-contract.json#/rowLimit"
+      ]
+    },
+    {
+      "ruleId": "presentation.formats.v2",
+      "source": "desired-formats",
+      "targets": [
+        "report-contract.json#/presentation/requestedFormats"
+      ]
+    },
+    {
+      "ruleId": "alerts.status.v2",
+      "source": "alerts-enabled",
+      "targets": [
+        "report-contract.json#/alertRequirements/status"
+      ]
+    },
+    {
+      "ruleId": "alerts.modes.v2",
+      "source": "alert-modes",
+      "targets": [
+        "report-contract.json#/alertRequirements/modes"
+      ]
+    },
+    {
+      "ruleId": "alerts.channels.v2",
+      "source": "alert-channels",
+      "targets": [
+        "report-contract.json#/alertRequirements/channels"
+      ]
+    },
+    {
+      "ruleId": "alerts.recipients.v2",
+      "source": "alert-recipient-roles",
+      "targets": [
+        "report-contract.json#/alertRequirements/recipientRoles"
+      ]
+    },
+    {
+      "ruleId": "alerts.custom-recipient.v2",
+      "source": "custom-alert-recipient-role",
+      "targets": [
+        "report-contract.json#/alertRequirements/customRecipientRole"
+      ]
+    },
+    {
+      "ruleId": "alerts.event-cooldown.v1",
+      "source": "alert-cooldown",
+      "targets": [
+        "report-contract.json#/alertRequirements/eventPolicy/cooldown"
+      ]
+    },
+    {
+      "ruleId": "alerts.event-escalation.v1",
+      "source": "alert-escalation-mode",
+      "targets": [
+        "report-contract.json#/alertRequirements/eventPolicy/escalation"
+      ]
+    },
+    {
+      "ruleId": "alerts.event-escalation-role.v1",
+      "source": "alert-escalation-role",
+      "targets": [
+        "report-contract.json#/alertRequirements/eventPolicy/escalation/recipientRole"
+      ]
+    },
+    {
+      "ruleId": "alerts.digest-cadence.v2",
+      "source": "digest-cadence",
+      "targets": [
+        "report-contract.json#/alertRequirements/digestCadence"
+      ]
+    },
+    {
+      "ruleId": "governance.cadence.v2",
+      "source": "review-cadence",
+      "targets": [
+        "report-contract.json#/governance/reviewCadence"
+      ]
+    }
+  ],
+  "questionPath": [
+    {
+      "evaluatedCondition": "route default",
+      "normalizedAnswer": "executive",
+      "order": 1,
+      "origin": "default",
+      "questionId": "route-recipient-persona",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "route default",
+      "normalizedAnswer": "cloud-cost-management",
+      "order": 2,
+      "origin": "default",
+      "questionId": "route-primary-concern",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "always",
+      "normalizationMethod": "multi-option",
+      "normalizedAnswer": [
+        "spend-visibility",
+        "plan-performance",
+        "anomaly-management",
+        "accountability"
+      ],
+      "order": 3,
+      "origin": "user",
+      "questionId": "cloudability-goals",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "useCases count > 1",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "anomaly-management",
+      "order": 4,
+      "origin": "user",
+      "questionId": "lead-use-case",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "always",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "month-to-date",
+      "order": 5,
+      "origin": "user",
+      "questionId": "current-period",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "useCases includes plan-performance or anomaly-management",
+      "normalizationMethod": "multi-option",
+      "normalizedAnswer": [
+        "prior-period",
+        "budget",
+        "forecast"
+      ],
+      "order": 6,
+      "origin": "user",
+      "questionId": "comparison-baselines",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "comparisonBaselines includes prior-period",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "same-elapsed-period",
+      "order": 7,
+      "origin": "user",
+      "questionId": "prior-period-mode",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "comparisonBaselines includes budget",
+      "normalizationMethod": "text",
+      "normalizedAnswer": "Finance Approved Budget",
+      "order": 8,
+      "origin": "user",
+      "questionId": "budget-source",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "comparisonBaselines includes budget",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "fiscal-month",
+      "order": 9,
+      "origin": "user",
+      "questionId": "budget-period",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "comparisonBaselines includes budget",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "accountability-dimension",
+      "order": 10,
+      "origin": "user",
+      "questionId": "budget-grain",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "comparisonBaselines includes forecast",
+      "normalizationMethod": "text",
+      "normalizedAnswer": "Cloud Finance Forecast",
+      "order": 11,
+      "origin": "user",
+      "questionId": "forecast-source",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "comparisonBaselines includes forecast",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "fiscal-year-end",
+      "order": 12,
+      "origin": "user",
+      "questionId": "forecast-horizon",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "comparisonBaselines includes forecast",
+      "normalizationMethod": "date",
+      "normalizedAnswer": "2026-08-01",
+      "order": 13,
+      "origin": "user",
+      "questionId": "forecast-as-of",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "comparisonBaselines includes forecast",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "accountability-dimension",
+      "order": 14,
+      "origin": "user",
+      "questionId": "forecast-grain",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "useCases includes plan-performance or anomaly-management",
+      "normalizationMethod": "currency",
+      "normalizedAnswer": "USD",
+      "order": 15,
+      "origin": "user",
+      "questionId": "reporting-currency",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "always",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "organization",
+      "order": 16,
+      "origin": "user",
+      "questionId": "organizational-scope",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "scope in [business-unit, cost-center]",
+      "normalizedAnswer": null,
+      "order": 17,
+      "origin": "derived",
+      "questionId": "scope-value",
+      "status": "skipped"
+    },
+    {
+      "evaluatedCondition": "always",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "cost-center",
+      "order": 18,
+      "origin": "user",
+      "questionId": "accountability-dimension",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "always",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "requested",
+      "order": 19,
+      "origin": "user",
+      "questionId": "additional-data-status",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "additionalDataStatus == requested",
+      "normalizationMethod": "multi-option",
+      "normalizedAnswer": [
+        "cmdb-service-catalog",
+        "business-kpi"
+      ],
+      "order": 20,
+      "origin": "user",
+      "questionId": "additional-data-domains",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "additionalDataStatus == requested",
+      "normalizationMethod": "text",
+      "normalizedAnswer": "Enterprise CMDB/service catalog and governed business KPI data product",
+      "order": 21,
+      "origin": "user",
+      "questionId": "additional-data-source-summary",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "additionalDataStatus == requested",
+      "normalizationMethod": "multi-option",
+      "normalizedAnswer": [
+        "application",
+        "reporting-period"
+      ],
+      "order": 22,
+      "origin": "user",
+      "questionId": "additional-data-join-keys",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "additionalDataJoinKeys includes custom",
+      "normalizedAnswer": null,
+      "order": 23,
+      "origin": "derived",
+      "questionId": "additional-data-custom-join-key",
+      "status": "skipped"
+    },
+    {
+      "evaluatedCondition": "additionalDataStatus == requested",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "selected-join-keys",
+      "order": 24,
+      "origin": "user",
+      "questionId": "additional-data-grain",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "additionalDataStatus == requested",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "daily",
+      "order": 25,
+      "origin": "user",
+      "questionId": "additional-data-refresh",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "additionalDataStatus == requested",
+      "normalizationMethod": "text",
+      "normalizedAnswer": "Enterprise Data Product Owner",
+      "order": 26,
+      "origin": "user",
+      "questionId": "additional-data-owner-role",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "useCases includes anomaly-management",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "both",
+      "order": 27,
+      "origin": "user",
+      "questionId": "materiality-method",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "materialityMethod in [percentage, both]",
+      "normalizationMethod": "number",
+      "normalizedAnswer": 10,
+      "order": 28,
+      "origin": "user",
+      "questionId": "threshold-percent",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "materialityMethod in [amount, both]",
+      "normalizationMethod": "number",
+      "normalizedAnswer": 20000,
+      "order": 29,
+      "origin": "user",
+      "questionId": "threshold-amount",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "materialityMethod == both",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "either",
+      "order": 30,
+      "origin": "user",
+      "questionId": "threshold-combination",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "anomaly-management selected and comparisonBaselines count > 1",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "any",
+      "order": 31,
+      "origin": "user",
+      "questionId": "baseline-breach-mode",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "useCases includes anomaly-management",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "approve-corrective-action",
+      "order": 32,
+      "origin": "user",
+      "questionId": "breach-action",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "useCases includes anomaly-management or accountability",
+      "normalizationMethod": "text",
+      "normalizedAnswer": "Cloud Cost Owner",
+      "order": 33,
+      "origin": "user",
+      "questionId": "action-owner-role",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "always",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "recommended",
+      "order": 34,
+      "origin": "user",
+      "questionId": "presentation-mode",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "presentationMode == custom",
+      "normalizedAnswer": null,
+      "order": 35,
+      "origin": "derived",
+      "questionId": "visual-components",
+      "status": "skipped"
+    },
+    {
+      "evaluatedCondition": "visualComponents includes detailed-table",
+      "normalizedAnswer": null,
+      "order": 36,
+      "origin": "derived",
+      "questionId": "table-density",
+      "status": "skipped"
+    },
+    {
+      "evaluatedCondition": "always",
+      "normalizationMethod": "multi-option",
+      "normalizedAnswer": [
+        "cloudability-view",
+        "pdf-summary",
+        "json-specification"
+      ],
+      "order": 37,
+      "origin": "user",
+      "questionId": "desired-formats",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "always",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "yes",
+      "order": 38,
+      "origin": "user",
+      "questionId": "alerts-enabled",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "alertsEnabled == yes",
+      "normalizationMethod": "multi-option",
+      "normalizedAnswer": [
+        "material-exception",
+        "scheduled-digest"
+      ],
+      "order": 39,
+      "origin": "user",
+      "questionId": "alert-modes",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "alertsEnabled == yes",
+      "normalizationMethod": "multi-option",
+      "normalizedAnswer": [
+        "email",
+        "microsoft-teams"
+      ],
+      "order": 40,
+      "origin": "user",
+      "questionId": "alert-channels",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "alertsEnabled == yes",
+      "normalizationMethod": "multi-option",
+      "normalizedAnswer": [
+        "report-owner",
+        "finance-leadership"
+      ],
+      "order": 41,
+      "origin": "user",
+      "questionId": "alert-recipient-roles",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "alertRecipientRoles includes custom-role",
+      "normalizedAnswer": null,
+      "order": 42,
+      "origin": "derived",
+      "questionId": "custom-alert-recipient-role",
+      "status": "skipped"
+    },
+    {
+      "evaluatedCondition": "alertModes includes material-exception",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "24-hours",
+      "order": 43,
+      "origin": "user",
+      "questionId": "alert-cooldown",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "alertModes includes material-exception",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "3-days",
+      "order": 44,
+      "origin": "user",
+      "questionId": "alert-escalation-mode",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "material-exception selected and escalation timing is defined",
+      "normalizationMethod": "text",
+      "normalizedAnswer": "Cloud Finance Director",
+      "order": 45,
+      "origin": "user",
+      "questionId": "alert-escalation-role",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "alertModes includes scheduled-digest",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "weekly",
+      "order": 46,
+      "origin": "user",
+      "questionId": "digest-cadence",
+      "status": "answered"
+    },
+    {
+      "evaluatedCondition": "always",
+      "normalizationMethod": "direct-option",
+      "normalizedAnswer": "monthly",
+      "order": 47,
+      "origin": "user",
+      "questionId": "review-cadence",
+      "status": "answered"
+    }
+  ],
+  "recipeId": "executive.cloud-cost-management.v2",
+  "schemaVersion": "0.3.0",
+  "traceId": "trace-int-executive-cloud-overspend-001"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "edc-project-showcase",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Selected enterprise AI, FinOps, and product architecture work by Eric Driscoll",
+  "engines": { "node": ">=24 <25" },
+  "scripts": { "test": "node --test tests/*.test.mjs" }
+}
