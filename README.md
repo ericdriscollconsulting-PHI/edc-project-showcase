@@ -6,6 +6,8 @@ My work combines client-facing advisory, cloud economics, systems architecture, 
 
 ## Start here
 
+See the [product one-pager](PRODUCT.md) for audience, scope, run instructions, and proposed milestones.
+
 | Project | Business problem | What to review |
 |---|---|---|
 | **FinOps Report Architect** | Repeated discovery and report revisions consume consultant and client labor while obscuring the decision a report should support. | [Case study](case-studies/report-architect.md) · [Query planner](examples/report-architect/src/build-cloudability-query.ts) · [Synthetic report package](examples/report-architect/fixtures/output-package/report-rationale.md) |
