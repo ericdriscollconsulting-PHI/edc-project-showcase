@@ -24,6 +24,12 @@ Report Architect material comes from the private working project's main-branch r
 
 The Report Architect selections are copied unchanged, including the synthetic output package. QUICKDRAW changes only its type-only import to a local minimal interface; its runtime function is unchanged. The showcase demos, tests, case studies, and minimal Task interface were prepared for this portfolio. The QUICKDRAW tests adapt the source project's preparation scenarios and omit database and UI coverage.
 
+### Reproduce the unchanged-source check
+
+With Node.js 24, run `node --test tests/provenance.test.mjs` (also included in `npm test`). The dependency-free check reads raw file bytes and hashes the Git blob header (`blob <byte length>` followed by a NUL byte) plus those bytes using SHA-1. It compares all 12 unchanged Report Architect files with the table above and asserts exact table membership, so missing, duplicate, unexpected, or malformed rows fail rather than silently reducing coverage. An in-memory mutation test demonstrates rejection without editing a copied file.
+
+The QUICKDRAW row records the **original source** blob hash, not the adapted local file's hash. It cannot be compared directly with the local bytes because of the type-only import adaptation. Reproducing the original blob would require the original import; this check neither invents that import nor fetches or verifies private source. It validates the QUICKDRAW row's presence and hash format but deliberately excludes its adapted bytes from hash comparison. Matching the Report Architect hashes establishes consistency with this recorded table, not author authenticity or independent private-repository verification.
+
 ## Claim boundaries
 
 ### Internal orchestration milestone
