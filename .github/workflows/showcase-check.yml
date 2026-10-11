@@ -1,0 +1,51 @@
+name: Showcase check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Showcase check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Governance preflight
+        if: github.event_name == 'pull_request'
+        shell: bash
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          case "$PR_AUTHOR" in "dependabot[bot]"|"renovate[bot]") echo "Dependency bot: exempt."; exit 0;; esac
+          if printf '%s\n' "$PR_BODY" | grep -Eq '^Governance: [0-9a-f]{40}([[:space:]]|$)'; then
+            echo "Governance commit recorded."
+          else
+            echo "::error::PR description needs a line 'Governance: <40-character edc-governance commit>' (EDC-POL-004 governance preflight)."
+            exit 1
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24'
+          package-manager-cache: false
+
+      - name: Run behavior tests
+        run: npm test
