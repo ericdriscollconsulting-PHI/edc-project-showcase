@@ -19,3 +19,7 @@ The examples run without dependencies, credentials, or network access. These res
 This documentation-only addition was checked against the two internal completion reports and the September 19 closeout. The JSON summary was parsed and its token totals, three single submissions, zero retries, and pending acceptance were reconciled to those records. Relative links and public-content boundaries were checked. The technical diagram describes the demonstrated draft-delivery path.
 
 No runtime code changed, no new model execution was requested, and no new host test was performed. The 13-test result above applies to the original runnable examples; it is not an orchestration acceptance result. Human intervention estimates and unavailable financial telemetry retain their original qualifications.
+
+## Evidence regression checks
+
+`npm test` on Node.js 24.19.0 passes all 28 tests, including 15 dependency-free evidence checks. `tests/evidence.test.mjs` reconciles per-run and aggregate tokens (cached input is included, not added again), draft/submission/retry counts and acceptance flags; it pins three submissions, zero retries, zero accepted outcomes and the null cost with its undefined reason. In-memory negative controls reject inconsistent totals and changed checkpoint/economics claims without rewriting the historical JSON. These checks protect internal consistency, not original receipt authenticity, new executions or business acceptance.
