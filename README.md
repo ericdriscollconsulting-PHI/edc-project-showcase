@@ -18,7 +18,7 @@ See the [product one-pager](PRODUCT.md) for audience, scope, run instructions, a
 
 ## Run the selected examples
 
-Requires **Node.js 24.x**. No package installation, credentials, or external services are required.
+Requires **Node.js >=24.2 <25** (minimum 24.2.0 for the demos' `import.meta.main` entry points). No package installation, credentials, or external services are required.
 
 ```bash
 node --test tests/*.test.mjs
@@ -27,6 +27,8 @@ node examples/quickdraw/demo.mjs
 ```
 
 The Report Architect example verifies a six-file synthetic package and recreates its read-query plan using selected modules from the working project. The QUICKDRAW example classifies synthetic work into preparation, handoff, and review states. Neither example executes a client query or dispatches work.
+
+Node strips TypeScript syntax when running the selected source. These runtime tests, including subprocess smoke tests for both demos, do **not** perform static type checking.
 
 ## Evidence and scope
 

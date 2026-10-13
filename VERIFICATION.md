@@ -1,5 +1,21 @@
 # Verification
 
+## Demo runtime floor and subprocess coverage
+
+Verified locally on September 30, 2026 with Node.js **24.2.0**, the documented minimum (`>=24.2 <25`). Official Linux x64 Node distributions were checked against their published SHA-256 sums.
+
+| Check | Result |
+|---|---|
+| `npm run test` | 15 passed; 0 failed (13 existing behavior tests plus 2 CLI smoke tests) |
+| `node examples/report-architect/demo.mjs` | Exit 0; nonempty JSON with verified package identity and three read-only GET queries |
+| `node examples/quickdraw/demo.mjs` | Exit 0; nonempty JSON with `dispatchAuthorized: false` |
+| Node 24.0.0 negative control: `node --test tests/demos.test.mjs` | Both tests failed on empty stdout despite exit 0, reproducing the `import.meta.main` entry-point gap |
+| Node 24.2.0: `node --test tests/demos.test.mjs` | Both tests passed |
+
+The smoke tests launch the real entry points using `process.execPath`, parse stdout as JSON, and enforce these output invariants without dependencies or network calls. Node 24.2.0 emits an experimental type-stripping warning on stderr; stdout remains valid JSON. Node strips TypeScript syntax, but these checks do **not** perform static type checking. No compiler or linter was added, and selected upstream source and existing behavior tests are unchanged.
+
+## Original selected-example verification
+
 Verified locally on September 20, 2026 with Node.js 24.19.0.
 
 | Check | Result |
